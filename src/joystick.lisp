@@ -37,3 +37,6 @@ This function is called automatically by the event loop if joystick events are e
 
 (defun joystick-instance-id (joystick)
   (sdl-joystick-instance-id joystick))
+
+(defun joystick-get-axis (joystick axis)
+  (sdl-joystick-get-axis joystick axis))
