@@ -161,6 +161,7 @@
    #:game-controller-from-instance-id
    #:game-controller-add-mappings-from-file
    #:game-controller-name
+   #:game-controller-get-axis
 
    ;; rect.lisp
    #:make-point

@@ -99,3 +99,8 @@ controller to have a different binding."
 
 (defun game-controller-name (gamecontroller)
   (sdl-game-controller-name gamecontroller))
+
+(defun game-controller-get-axis (gamecontroller axis)
+  "Returns the current value of the GAMECONTROLLER's AXIS based upon the
+controller bindings."
+  (sdl-game-controller-get-axis gamecontroller axis))
