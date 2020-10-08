@@ -26,7 +26,9 @@
   (:shadow #:sdl-error)
   (:export
    #:init
+   #:init-everything
    #:quit
+   #:quit*
    #:was-init
    #:with-init
    #:in-main-thread
