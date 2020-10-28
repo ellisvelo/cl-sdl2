@@ -188,6 +188,7 @@
    #:rect-equals
    #:has-intersect
    #:intersect-rect
+   #:intersect-rect-and-line
    #:union-rect
 
    ;; render.lisp
