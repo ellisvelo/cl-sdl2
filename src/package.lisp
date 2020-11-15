@@ -164,6 +164,9 @@
    #:game-controller-add-mappings-from-file
    #:game-controller-name
    #:game-controller-get-axis
+   #:game-controller-mapping
+   #:game-controller-get-button-from-string
+   #:game-controller-get-string-for-button
 
    ;; rect.lisp
    #:make-point

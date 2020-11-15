@@ -104,3 +104,19 @@ controller to have a different binding."
   "Returns the current value of the GAMECONTROLLER's AXIS based upon the
 controller bindings."
   (sdl-game-controller-get-axis gamecontroller axis))
+
+(defun game-controller-mapping (gamecontroller)
+  "Return the mapping for the GAMECONTROLLER."
+
+  (multiple-value-bind (mapping ptr)
+      (sdl-game-controller-mapping gamecontroller)
+    (foreign-free ptr)
+    mapping))
+
+(defun game-controller-get-button-from-string (button-name)
+  "Return the SDL_GameControllerButton enum value for BUTTON-NAME."
+  (sdl-game-controller-get-button-from-string button-name))
+
+(defun game-controller-get-string-for-button (button)
+  "Return the name for the BUTTON."
+  (sdl-game-controller-get-string-for-button button))
