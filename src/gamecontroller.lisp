@@ -110,7 +110,7 @@ controller bindings."
 
   (multiple-value-bind (mapping ptr)
       (sdl-game-controller-mapping gamecontroller)
-    (foreign-free ptr)
+    (sdl-free (autowrap:make-wrapper :ptr ptr))
     mapping))
 
 (defun game-controller-get-button-from-string (button-name)
