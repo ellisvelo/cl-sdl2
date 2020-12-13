@@ -89,3 +89,13 @@
           (b sdl2-ffi:uint8))
     (check-rc (sdl-get-surface-color-mod surface (r &) (g &) (b &)))
     (values r g b)))
+
+(defun set-surface-blend-mode (surface blend-mode)
+  "Use this function to set the blend mode used for blit operations."
+  (check-rc (sdl-set-surface-blend-mode surface blend-mode)))
+
+(defun get-surface-blend-mode (surface)
+  "Use this function to get the blend mode used for blit operations."
+  (c-let ((blend-mode sdl2-ffi:sdl-blend-mode))
+    (check-rc (sdl-get-surface-blend-mode surface (blend-mode &)))
+    blend-mode))

@@ -266,6 +266,8 @@
    #:surface-pitch
    #:surface-format
    #:surface-format-format
+   #:set-surface-blend-mode
+   #:get-surface-blend-mode
    #:create-rgb-surface
    #:create-rgb-surface-from
    #:create-rgb-surface-with-format-from
