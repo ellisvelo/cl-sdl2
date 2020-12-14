@@ -96,6 +96,6 @@
 
 (defun get-surface-blend-mode (surface)
   "Use this function to get the blend mode used for blit operations."
-  (c-let ((blend-mode sdl2-ffi:sdl-blend-mode))
+  (c-with ((blend-mode sdl2-ffi:sdl-blend-mode))
     (check-rc (sdl-get-surface-blend-mode surface (blend-mode &)))
     blend-mode))
