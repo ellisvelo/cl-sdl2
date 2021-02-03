@@ -118,6 +118,12 @@ rotating it by angle around the given center and also flipping it top-bottom and
   "Use this function to set the blend mode for a texture, used by SDL_RenderCopy()."
   (check-rc (sdl2-ffi.functions:sdl-set-texture-blend-mode texture blend-mode)))
 
+(defun get-texture-blend-mode (texture)
+  "Use this function to get the blend mode used for texture copy operations."
+  (c-with ((blend-mode sdl2-ffi:sdl-blend-mode))
+    (check-rc (sdl-get-texture-blend-mode texture (blend-mode &)))
+    blend-mode))
+
 (defun set-render-draw-blend-mode (renderer blend-mode)
   "Use this function to set the blend mode used for drawing operations (Fill and Line)."
   (check-rc (sdl2-ffi.functions:sdl-set-render-draw-blend-mode renderer blend-mode)))
