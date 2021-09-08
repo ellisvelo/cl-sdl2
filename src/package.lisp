@@ -36,6 +36,7 @@
    #:version
    #:version-wrapped
    #:make-this-thread-main
+   #:get-error
 
    ;; video.lisp
    #:get-num-video-drivers

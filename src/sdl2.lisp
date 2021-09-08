@@ -255,3 +255,7 @@ thread."
   (values sdl2-ffi:+sdl-major-version+
           sdl2-ffi:+sdl-minor-version+
           sdl2-ffi:+sdl-patchlevel+))
+
+(defun get-error ()
+  "Get the last error that was set for the current thread."
+  (sdl-get-error))
