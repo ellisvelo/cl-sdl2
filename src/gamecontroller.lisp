@@ -113,6 +113,10 @@ controller bindings."
     (sdl-free (autowrap:make-wrapper :ptr ptr))
     mapping))
 
+(defun game-controller-get-button (gamecontroller button)
+  "Return the current state of a button on a game controller."
+  (sdl-game-controller-get-button gamecontroller button))
+
 (defun game-controller-get-button-from-string (button-name)
   "Return the SDL_GameControllerButton enum value for BUTTON-NAME."
   (sdl-game-controller-get-button-from-string button-name))
