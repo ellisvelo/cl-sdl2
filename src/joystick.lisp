@@ -40,3 +40,7 @@ This function is called automatically by the event loop if joystick events are e
 
 (defun joystick-get-axis (joystick axis)
   (sdl-joystick-get-axis joystick axis))
+
+(defun joystick-get-hat (joystick hat)
+  "Return the current state of a hat"
+  (sdl-joystick-get-hat joystick hat))

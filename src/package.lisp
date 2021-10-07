@@ -153,6 +153,7 @@
    #:joystick-button-count
    #:joystick-instance-id
    #:joystick-get-axis
+   #:joystick-get-hat
 
    ;; gamecontroller.lisp
    #:game-controller-p
