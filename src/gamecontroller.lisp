@@ -107,7 +107,6 @@ controller bindings."
 
 (defun game-controller-mapping (gamecontroller)
   "Return the mapping for the GAMECONTROLLER."
-
   (multiple-value-bind (mapping ptr)
       (sdl-game-controller-mapping gamecontroller)
     (sdl-free (autowrap:make-wrapper :ptr ptr))
@@ -119,8 +118,8 @@ controller bindings."
 
 (defun game-controller-get-button-from-string (button-name)
   "Return the SDL_GameControllerButton enum value for BUTTON-NAME."
-  (sdl-game-controller-get-button-from-string button-name))
+  (check-rc (sdl-game-controller-get-button-from-string button-name)))
 
 (defun game-controller-get-string-for-button (button)
   "Return the name for the BUTTON."
-  (sdl-game-controller-get-string-for-button button))
+  (check-nullptr (sdl-game-controller-get-string-for-button button)))
