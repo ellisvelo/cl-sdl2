@@ -105,6 +105,10 @@ controller to have a different binding."
 controller bindings."
   (sdl-game-controller-get-axis gamecontroller axis))
 
+(defun game-controller-get-axis-from-string (axis-name)
+  "Return the SDL_GameControllerButton enum value for BUTTON-NAME."
+  (check-rc (sdl-game-controller-get-axis-from-string axis-name)))
+
 (defun game-controller-mapping (gamecontroller)
   "Return the mapping for the GAMECONTROLLER."
   (multiple-value-bind (mapping ptr)

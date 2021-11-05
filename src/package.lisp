@@ -38,6 +38,7 @@
    #:make-this-thread-main
    #:get-error
    #:sdl-error
+   #:sdl-rc-error
 
    ;; video.lisp
    #:get-num-video-drivers
@@ -168,6 +169,7 @@
    #:game-controller-add-mappings-from-file
    #:game-controller-name
    #:game-controller-get-axis
+   #:game-controller-get-axis-from-string
    #:game-controller-mapping
    #:game-controller-get-button
    #:game-controller-get-button-from-string
