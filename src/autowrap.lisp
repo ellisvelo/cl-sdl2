@@ -31,7 +31,7 @@
                    "machine/_types.h"
                    "SDL2")
  :sysincludes `,(cl:append
-		 (cl:list (uiop:getenv "EXTRA_INCLUDES"))
+		 (uiop:split-string (uiop:getenv "EXTRA_INCLUDES") :separator " ")
                  #+openbsd (cl:list "/usr/X11R6/include")
                  #+(and unix (not darwin))
                  (cl:list  "/usr/lib/clang/11.1.0/include/" "/usr/include/"))
