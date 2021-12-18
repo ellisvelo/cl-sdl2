@@ -9,16 +9,32 @@
                    "/usr/include/"
                    "/usr/include/arm-linux-gnueabihf"
                    "/usr/include/X11/")
- :include-sources ("stdint.h"
+ :include-sources ("sys/_types/_int8_t.h"
+		   "sys/_types/_int16_t.h"
+		   "sys/_types/_int32_t.h"
+		   "sys/_types/_int64_t.h"
+		   "sys/_types/_u_int8_t.h"
+		   "sys/_types/_u_int16_t.h"
+		   "sys/_types/_u_int32_t.h"
+		   "sys/_types/_u_int64_t.h"
+		   "sys/_types/_size_t.h"
+		   "sys/_types/_wchar_t.h"
+		   "_types/_uint8_t.h"
+		   "_types/_uint16_t.h"
+		   "_types/_uint32_t.h"
+		   "_types/_uint64_t.h"
+		   "arm/_types.h"
+		   "stdint.h"
                    "bits/types.h"
                    "sys/types.h"
                    "bits/stdint"
                    "machine/_types.h"
                    "SDL2")
  :sysincludes `,(cl:append
+		 (cl:list (uiop:getenv "EXTRA_INCLUDES"))
                  #+openbsd (cl:list "/usr/X11R6/include")
                  #+(and unix (not darwin))
-                 (cl:list "/usr/lib/clang/11.1.0/include/" "/usr/include/"))
+                 (cl:list  "/usr/lib/clang/11.1.0/include/" "/usr/include/"))
  :exclude-definitions ("SDL_main"
                        "SDL_LogMessageV"
                        "SDL_vsnprintf"
