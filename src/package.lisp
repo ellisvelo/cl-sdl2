@@ -401,7 +401,10 @@
    #:+packedlayout-565+
    #:+packedlayout-8888+
    #:+packedlayout-2101010+
-   #:+packedlayout-1010102+))
+   #:+packedlayout-1010102+
+   #:+textureaccess-static+
+   #:+textureaccess-streaming+
+   #:+textureaccess-target+))
 
 (defpackage #:sdl2-examples
   (:use #:cl

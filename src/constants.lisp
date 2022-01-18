@@ -88,3 +88,8 @@
 (defconstant +packedlayout-8888+ sdl2-ffi:+sdl-packedlayout-8888+)
 (defconstant +packedlayout-2101010+ sdl2-ffi:+sdl-packedlayout-2101010+)
 (defconstant +packedlayout-1010102+ sdl2-ffi:+sdl-packedlayout-1010102+)
+
+;;; texture access patterns
+(defconstant +textureaccess-static+ sdl2-ffi:+sdl-textureaccess-static+)
+(defconstant +textureaccess-streaming+ sdl2-ffi:+sdl-textureaccess-streaming+)
+(defconstant +textureaccess-target+ sdl2-ffi:+sdl-textureaccess-target+)
