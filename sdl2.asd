@@ -17,6 +17,7 @@
     :components
     ((:static-file "SDL2.h")
      (:static-file "SDL2.aarch64-pc-linux-gnu.spec")
+     (:static-file "SDL2.aarch64-apple-darwin9.spec")
      (:static-file "SDL2.aarch64-unknown-linux-android.spec")
      (:static-file "SDL2.arm-pc-linux-gnu.spec")
      (:static-file "SDL2.arm-unknown-linux-androideabi.spec")
