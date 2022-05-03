@@ -40,6 +40,10 @@
    #:sdl-error
    #:sdl-rc-error
 
+   ;; hints.lisp
+   #:get-hint
+   #:set-hint
+
    ;; video.lisp
    #:get-num-video-drivers
    #:get-video-driver
@@ -75,6 +79,7 @@
    #:get-window-flags
    #:get-window-pixel-format
    #:get-window-id
+   #:get-window-display-index
    #:enable-screensaver
    #:disable-screensaver
    #:screensaver-enabled-p
@@ -176,23 +181,36 @@
    #:game-controller-get-string-for-button
 
    ;; rect.lisp
+   #:copy-f-rect
+   #:copy-into-f-rect
+   #:copy-into-point
+   #:copy-into-rect
+   #:copy-point
+   #:copy-rect
+   #:f-rect-empty
+   #:f-rect-equals
+   #:f-rect-height
+   #:f-rect-width
+   #:f-rect-x
+   #:f-rect-y
+   #:f-rects*
+   #:free-f-rect
+   #:free-point
+   #:free-rect
+   #:has-intersect
+   #:intersect-rect
+   #:make-f-rect
    #:make-point
+   #:make-rect
    #:point-x
    #:point-y
-   #:copy-point
-   #:copy-into-point
-   #:free-point
-   #:with-points
    #:points*
-   #:make-rect
+   #:rect-empty
+   #:rect-equals
+   #:rect-height
+   #:rect-width
    #:rect-x
    #:rect-y
-   #:rect-width
-   #:rect-height
-   #:copy-rect
-   #:copy-into-rect
-   #:free-rect
-   #:with-rects
    #:rects*
    #:rect-empty
    #:rect-equals
@@ -200,6 +218,9 @@
    #:intersect-rect
    #:intersect-rect-and-line
    #:union-rect
+   #:with-f-rects
+   #:with-points
+   #:with-rects
 
    ;; render.lisp
    #:render-set-viewport
@@ -212,7 +233,9 @@
    #:render-draw-rect
    #:render-draw-rects
    #:render-fill-rect
+   #:render-fill-rect-f
    #:render-fill-rects
+   #:render-fill-rects-f
    #:set-render-draw-color
    #:get-render-draw-color
    #:set-texture-blend-mode
@@ -220,6 +243,8 @@
    #:set-render-target
    #:render-copy
    #:render-copy-ex
+   #:render-copy-ex-f
+   #:render-copy-f
    #:render-present
    #:update-texture
    #:get-num-render-drivers
@@ -230,6 +255,7 @@
    #:destroy-renderer
    #:get-renderer
    #:get-renderer-info
+   #:get-renderer-max-texture-size
    #:get-renderer-output-size
    #:create-texture
    #:create-texture-from-surface

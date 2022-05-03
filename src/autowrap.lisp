@@ -34,7 +34,7 @@
 		 (uiop:split-string (uiop:getenv "EXTRA_INCLUDES") :separator " ")
                  #+openbsd (cl:list "/usr/X11R6/include")
                  #+(and unix (not darwin))
-                 (cl:list  "/usr/lib/clang/11.1.0/include/" "/usr/include/"))
+                 (cl:list "/usr/lib/clang/13.0.1/include/"))
  :exclude-definitions ("SDL_main"
                        "SDL_LogMessageV"
                        "SDL_vsnprintf"

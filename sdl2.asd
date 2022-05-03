@@ -1,6 +1,6 @@
 (asdf:defsystem #:sdl2
   :description "Bindings for SDL2 using c2ffi."
-  :author "Chip Collier <photex@lofidelitygames.com>, Ryan Pavlik <rpavlik@gmail.com>, Peter Keller <psilord@cs.wisc.edu>"
+  :author "Michael Fiano <mail@mfiano.net>, Chip Collier <photex@lofidelitygames.com>, Ryan Pavlik <rpavlik@gmail.com>, Peter Keller <psilord@cs.wisc.edu>"
   :license "MIT"
   :depends-on (:alexandria
                :cl-autowrap
@@ -16,16 +16,21 @@
     :pathname "spec"
     :components
     ((:static-file "SDL2.h")
+     (:static-file "SDL2.aarch64-pc-linux-gnu.spec")
+     (:static-file "SDL2.aarch64-unknown-linux-android.spec")
      (:static-file "SDL2.arm-pc-linux-gnu.spec")
+     (:static-file "SDL2.arm-unknown-linux-androideabi.spec")
      (:static-file "SDL2.i386-unknown-freebsd.spec")
      (:static-file "SDL2.i386-unknown-openbsd.spec")
      (:static-file "SDL2.i686-apple-darwin9.spec")
      (:static-file "SDL2.i686-pc-linux-gnu.spec")
      (:static-file "SDL2.i686-pc-windows-msvc.spec")
+     (:static-file "SDL2.i686-unknown-linux-android.spec")
      (:static-file "SDL2.x86_64-apple-darwin9.spec")
      (:static-file "SDL2.x86_64-pc-linux-gnu.spec")
      (:static-file "SDL2.x86_64-pc-windows-msvc.spec")
      (:static-file "SDL2.x86_64-unknown-freebsd.spec")
+     (:static-file "SDL2.x86_64-unknown-linux-android.spec")
      (:static-file "SDL2.x86_64-unknown-openbsd.spec")))
    (:file "package")
    (:file "library")
@@ -33,6 +38,7 @@
    (:file "util")
    (:file "constants")
    (:file "sdl2")
+   (:file "hints")
    (:file "rect")
    (:file "video")
    (:file "events")

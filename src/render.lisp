@@ -18,9 +18,7 @@
               (rinfo :max-texture-height)))))
 
 (defun free-render-info (rinfo)
-  "Specifically free the SDL_RendererInfo structure which will do the right thing with respect to
-the garbage collector. This is not required, but may make garbage collection performance better if
-used in tight SDL_RendererInfo allocating loops."
+  "Specifically free the SDL_RendererInfo structure."
   (foreign-free (ptr rinfo))
   (autowrap:invalidate rinfo))
 
@@ -89,10 +87,26 @@ structure."
   "Use this function to copy a portion of the texture to the current rendering target."
   (check-rc (sdl2-ffi.functions:sdl-render-copy renderer texture source-rect dest-rect)))
 
+(defun render-copy-f (renderer texture &key source-rect dest-rect)
+  "Copy a portion of the texture to the current rendering target at subpixel precision."
+  (check-rc (sdl2-ffi.functions:sdl-render-copy-f renderer texture source-rect dest-rect)))
+
 (defun render-copy-ex (renderer texture &key source-rect dest-rect angle center flip)
   "Use this function to copy a portion of the texture to the current rendering target, optionally
 rotating it by angle around the given center and also flipping it top-bottom and/or left-right."
   (check-rc (sdl2-ffi.functions:sdl-render-copy-ex
+             renderer
+             texture
+             source-rect
+             dest-rect
+             (coerce (or angle 0) 'double-float)
+             center
+             (mask-apply 'sdl-renderer-flip flip))))
+
+(defun render-copy-ex-f (renderer texture &key source-rect dest-rect angle center flip)
+  "Copy a portion of the source texture to the current rendering target, with rotation and flipping,
+at subpixel precision."
+  (check-rc (sdl2-ffi.functions:sdl-render-copy-ex-f
              renderer
              texture
              source-rect
@@ -161,10 +175,19 @@ rotating it by angle around the given center and also flipping it top-bottom and
 the drawing color. "
   (check-rc (sdl2-ffi.functions:sdl-render-fill-rect renderer sdl-rect)))
 
+(defun render-fill-rect-f (renderer sdl-rect)
+  "Fill a rectangle on the current rendering target with the drawing color at subpixel precision."
+  (check-rc (sdl2-ffi.functions:sdl-render-fill-rect-f renderer sdl-rect)))
+
 (defun render-fill-rects (renderer rects num-rects)
   "Use this function to fill some number of rectangles on the current
 rendering target with the drawing color."
   (check-rc (sdl2-ffi.functions:sdl-render-fill-rects renderer rects num-rects)))
+
+(defun render-fill-rects-f (renderer rects num-rects)
+  "Fill some number of rectangles on the current rendering target with the drawing color at subpixel
+precision."
+  (check-rc (sdl2-ffi.functions:sdl-render-fill-rects-f renderer rects num-rects)))
 
 (defun render-set-viewport (renderer sdl-rect)
   "Use this function to set the drawing area for rendering on the current target."
@@ -188,6 +211,13 @@ about the specified renderer, and return it."
   (let ((rinfo (make-renderer-info)))
     (check-rc (sdl-get-renderer-info renderer rinfo))
     rinfo))
+
+(defun get-renderer-max-texture-size (renderer)
+  (c-let ((info sdl2-ffi:sdl-renderer-info :from (get-renderer-info renderer)))
+    (unwind-protect
+         (values (info :max-texture-width)
+                 (info :max-texture-height))
+      (free-render-info info))))
 
 ;; TODO SDL_GetRendererOutputSize
 (defun get-renderer-output-size (renderer)
