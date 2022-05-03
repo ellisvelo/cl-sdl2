@@ -199,6 +199,7 @@
    #:free-rect
    #:has-intersect
    #:intersect-rect
+   #:intersect-rect-and-line
    #:make-f-rect
    #:make-point
    #:make-rect
@@ -212,11 +213,6 @@
    #:rect-x
    #:rect-y
    #:rects*
-   #:rect-empty
-   #:rect-equals
-   #:has-intersect
-   #:intersect-rect
-   #:intersect-rect-and-line
    #:union-rect
    #:with-f-rects
    #:with-points
