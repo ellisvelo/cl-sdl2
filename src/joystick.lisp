@@ -44,3 +44,11 @@ This function is called automatically by the event loop if joystick events are e
 (defun joystick-get-hat (joystick hat)
   "Return the current state of a hat"
   (sdl-joystick-get-hat joystick hat))
+
+(defun joystick-rumble (joystick low-frequency-rumble high-frequency-rumble duration-ms)
+  "Start a rumble effect on the joystick"
+  (sdl-joystick-rumble joystick low-frequency-rumble high-frequency-rumble duration-ms))
+
+(defun joystick-has-rumble (joystick)
+  "Return T when the JOYSTICK has rumble effects."
+  (sdl-true-p (sdl-joystick-has-rumble joystick)))

@@ -160,6 +160,8 @@
    #:joystick-instance-id
    #:joystick-get-axis
    #:joystick-get-hat
+   #:joystick-rumble
+   #:joystick-has-rumble
 
    ;; gamecontroller.lisp
    #:game-controller-p
