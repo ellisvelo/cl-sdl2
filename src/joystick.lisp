@@ -46,7 +46,8 @@ This function is called automatically by the event loop if joystick events are e
   (sdl-joystick-get-hat joystick hat))
 
 (defun joystick-rumble (joystick low-frequency-rumble high-frequency-rumble duration-ms)
-  "Start a rumble effect on the joystick"
+  "Start a rumble effect for a duration of DURATION-MS. The low and high
+frequences are between 0 and 0xFFFF."
   (sdl-joystick-rumble joystick low-frequency-rumble high-frequency-rumble duration-ms))
 
 (defun joystick-has-rumble (joystick)
