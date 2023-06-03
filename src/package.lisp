@@ -429,10 +429,3 @@
    #:+textureaccess-static+
    #:+textureaccess-streaming+
    #:+textureaccess-target+))
-
-(defpackage #:sdl2-examples
-  (:use #:cl
-        #:alexandria
-        #:cffi)
-  (:export #:basic-test
-           #:renderer-test))
