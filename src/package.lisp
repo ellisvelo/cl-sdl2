@@ -120,11 +120,13 @@
    #:scancode
    #:scancode-symbol
    #:scancode-key-to-value
+   #:get-mod-state
    #:mod-value
    #:sym-value
    #:scancode=
    #:mod-keywords
    #:mod-value-p
+   #:mod-key-state-p
    #:keyboard-state-p
    #:get-key-from-scancode
    #:get-key-name
@@ -239,6 +241,7 @@
    #:set-texture-blend-mode
    #:set-render-draw-blend-mode
    #:set-render-target
+   #:get-render-target
    #:render-copy
    #:render-copy-ex
    #:render-copy-ex-f
