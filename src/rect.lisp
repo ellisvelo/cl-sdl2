@@ -229,6 +229,14 @@ value is always a newly allocated SDL_Rect structure."
         (return-from intersect-rect (values nil empty))))
     (values t intersect)))
 
+(defun has-intersect-f (first-rect &rest rects)
+  "Return T if every SDL_FRect structure intersects every other SDL_FRect
+structure."
+  (loop :for (a b) :in (unique-pairs `(,first-rect ,@rects))
+        :do (unless (sdl-true-p (sdl-has-intersection-f a b))
+              (return-from has-intersect-f nil)))
+  t)
+
 (defun intersect-rect-and-line (rect x1 y1 x2 y2)
   "Returns five values where the first value is T if the coordinates of the line intersect RECT. The
 remaining returned values represent the starting and ending coordinates of the line clipped to the
@@ -242,6 +250,21 @@ boundary of the rectangle."
           x2pos x2
           y2pos y2)
     (let ((intersected (sdl-true-p (sdl-intersect-rect-and-line rect (x1pos &) (y1pos &) (x2pos &) (y2pos &)))))
+      (values intersected x1pos y1pos x2pos y2pos))))
+
+(defun intersect-f-rect-and-line (rect x1 y1 x2 y2)
+  "Returns five values where the first value is T if the coordinates of the line
+ intersect RECT. The remaining returned values represent the starting and ending
+coordinates of the line clipped to the boundary of the rectangle."
+  (c-with ((x1pos :float)
+           (y1pos :float)
+           (x2pos :float)
+           (y2pos :float))
+    (setf x1pos x1
+          y1pos y1
+          x2pos x2
+          y2pos y2)
+    (let ((intersected (sdl-true-p (sdl-intersect-f-rect-and-line rect (x1pos &) (y1pos &) (x2pos &) (y2pos &)))))
       (values intersected x1pos y1pos x2pos y2pos))))
 
 (defun union-rect (first-rect &rest rects)

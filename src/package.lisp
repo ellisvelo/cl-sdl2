@@ -202,8 +202,10 @@
    #:free-point
    #:free-rect
    #:has-intersect
+   #:has-intersect-f
    #:intersect-rect
    #:intersect-rect-and-line
+   #:intersect-f-rect-and-line
    #:make-f-rect
    #:make-point
    #:make-rect
