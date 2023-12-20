@@ -23,7 +23,6 @@
 		   "_types/_uint16_t.h"
 		   "_types/_uint32_t.h"
 		   "_types/_uint64_t.h"
-		   "arm/_types.h"
 		   "stdint.h"
                    "bits/types.h"
                    "sys/types.h"
