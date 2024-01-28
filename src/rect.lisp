@@ -169,7 +169,7 @@ to (make-rect 0 0 0 0).
 
   -> (#<SDL-FFI:SDL-RECT x 0 y 0 w 0 z 0>
       #<SDL-FFI:SDL-RECT x 5 y 10 w 15 h 20>
-      #<SDL-FFI:SDL-RECT x 2 y 2 w 3 d 40>)"
+      #<SDL-FFI:SDL-RECT x 2 y 2 w 3 h 40>)"
   (if (null bindings)
       `(progn ,@body)
       `(%with-rect (,(car bindings))
