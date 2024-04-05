@@ -173,6 +173,7 @@
    #:game-controller-attached-p
    #:game-controller-add-mapping
    #:game-controller-get-joystick
+   #:game-controller-has-rumble
    #:game-controller-instance-id
    #:game-controller-from-instance-id
    #:game-controller-add-mappings-from-file
@@ -183,6 +184,7 @@
    #:game-controller-get-button
    #:game-controller-get-button-from-string
    #:game-controller-get-string-for-button
+   #:game-controller-rumble
 
    ;; rect.lisp
    #:copy-f-rect

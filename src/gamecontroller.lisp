@@ -127,3 +127,11 @@ controller bindings."
 (defun game-controller-get-string-for-button (button)
   "Return the name for the BUTTON."
   (check-nullptr (sdl-game-controller-get-string-for-button button)))
+
+(defun game-controller-has-rumble (gamecontroller)
+  "Return whether a game controller has rumble support."
+  (sdl-true-p (sdl-game-controller-has-rumble gamecontroller)))
+
+(defun game-controller-rumble (gamecontroller low-freq-rumble high-freq-rumble duration-ms)
+  "Start a rumble effect on a game controller."
+  (check-rc (sdl-game-controller-rumble gamecontroller low-freq-rumble high-freq-rumble duration-ms)))
