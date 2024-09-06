@@ -7,8 +7,7 @@
                :cl-plus-c
                :cl-ppcre
                :trivial-channels
-               :trivial-features
-               #+darwin :cl-glut)
+               :trivial-features)
   :pathname "src"
   :serial t
   :components

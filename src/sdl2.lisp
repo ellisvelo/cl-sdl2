@@ -203,11 +203,6 @@ thread."
         (sb-thread:interrupt-thread thread #'sdl-main-thread)))
 
   (in-main-thread (:no-event t)
-    ;; HACK! glutInit on OSX uses some magic undocumented API to correctly make the calling thread
-    ;; the primary thread. This allows cl-sdl2 to actually work. Nothing else seemed to work at all
-    ;; to be honest.
-    #+(and ccl darwin)
-    (cl-glut:init)
     (let ((init-flags (autowrap:mask-apply 'sdl-init-flags sdl-init-flags)))
       (check-rc (sdl-init init-flags))
       (unless *lisp-message-event*
