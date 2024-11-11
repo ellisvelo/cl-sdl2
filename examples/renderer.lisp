@@ -37,6 +37,14 @@
     (multiple-value-bind (points num) (sdl2:points* a b c)
       (sdl2:render-draw-lines renderer points num))))
 
+(defun test-render-f-lines (renderer)
+  (sdl2:with-f-points ((a 200.0 200.0)
+                       (b 300.0 100.0)
+                       (c 400.0 200.0))
+    (sdl2:set-render-draw-color renderer 0 0 255 255)
+    (multiple-value-bind (points num) (sdl2:f-points* a b c)
+      (sdl2:render-draw-lines-f renderer points num))))
+
 (defun test-render-points (renderer)
   (sdl2:with-points ((a (random 800) (random 800))
                      (b (random 800) (random 800))
@@ -82,6 +90,7 @@
            (test-render-clear renderer)
            (test-render-hello renderer)
            (test-render-lines renderer)
+	   (test-render-f-lines renderer)
            (test-render-points renderer)
            (test-render-rect renderer)
            (test-render-rects renderer)

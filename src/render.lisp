@@ -157,6 +157,14 @@ at subpixel precision."
   "Pass a pointer to SDL_Point to render connected lines on the current rendering target."
   (check-rc (sdl2-ffi.functions:sdl-render-draw-lines renderer points num-points)))
 
+(defun render-draw-line-f (renderer x1 y1 x2 y2)
+  "Draw a line on the current rendering target at subpixel precision."
+  (check-rc (sdl2-ffi.functions:sdl-render-draw-line-f renderer x1 y1 x2 y2)))
+
+(defun render-draw-lines-f (renderer points num-points)
+  "Pass a pointer to SDL_FPoint to render connected lines on the current rendering target at subpixel precision."
+  (check-rc (sdl2-ffi.functions:sdl-render-draw-lines-f renderer points num-points)))
+
 (defun render-draw-point (renderer x y)
   "Use this function to draw a point on the current rendering target."
   (check-rc (sdl2-ffi.functions:sdl-render-draw-point renderer x y)))

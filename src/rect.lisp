@@ -10,8 +10,22 @@
 (define-struct-accessors (point sdl2-ffi:sdl-point)
   :x :y)
 
+(defun make-f-point (x y)
+  "Return an SDL_FPoint filled in with the arguments."
+  (c-let ((point sdl2-ffi:sdl-f-point))
+    (setf (point :x) x
+          (point :y) y)
+    point))
+
+(define-struct-accessors (f-point sdl2-ffi:sdl-f-point)
+  :x :y)
+
 (defmacro c-point ((wrapper-var) &body body)
   `(c-let ((,wrapper-var sdl2-ffi:sdl-point :from ,wrapper-var))
+     ,@body))
+
+(defmacro c-f-point ((wrapper-var) &body body)
+  `(c-let ((,wrapper-var sdl2-ffi:sdl-f-point :from ,wrapper-var))
      ,@body))
 
 (defmacro c-points ((&rest wrappers) &body body)
@@ -20,8 +34,19 @@
          (c-points (,@(cdr wrappers)) ,@body))
       `(progn ,@body)))
 
+(defmacro c-f-points ((&rest wrappers) &body body)
+  (if wrappers
+      `(c-f-point (,(car wrappers))
+         (c-f-points (,@(cdr wrappers)) ,@body))
+      `(progn ,@body)))
+
 (defmethod print-object ((point sdl2-ffi:sdl-point) stream)
   (c-point (point)
+    (print-unreadable-object (point stream :type t :identity t)
+      (format stream "x ~A y ~A" (point :x) (point :y)))))
+
+(defmethod print-object ((point sdl2-ffi:sdl-f-point) stream)
+  (c-f-point (point)
     (print-unreadable-object (point stream :type t :identity t)
       (format stream "x ~A y ~A" (point :x) (point :y)))))
 
@@ -39,19 +64,19 @@ dest-point."
   dest-point)
 
 (defun free-point (point)
-  "Specifically free the SDL_Point structure."
+  "Specifically free the SDL_Point or SDL_FPoint structure."
   (foreign-free (ptr point))
   (autowrap:invalidate point))
 
-;; used as a helper for with-points
-(defmacro %with-point ((binding) &body body)
+;; used as a helper for with-points and with-f-points
+(defmacro %with-point (make-point-fn default-value (binding) &body body)
   (cond
     ((symbolp binding)
-     `(let ((,binding (make-point 0 0)))
+     `(let ((,binding (,make-point-fn ,default-value ,default-value)))
         (unwind-protect (progn ,@body)
 	  (free-point ,binding))))
     ((= (length binding) 3)
-     `(let ((,(first binding) (make-point ,@(cdr binding))))
+     `(let ((,(first binding) (,make-point-fn ,@(cdr binding))))
 	(unwind-protect (progn ,@body)
 	  (free-point ,(first binding)))))
     (t
@@ -67,21 +92,50 @@ to (make-point 0 0).
   (let ((a 1) (b 2))
     (with-points (foo
                   (qux 5 10)
-                  (bar (1+ a) b)
-       (list foo qux bar))))
+                  (bar (1+ a) b))
+       (list foo qux bar)))
 
   -> (#<SDL-FFI:SDL-POINT x 0 y 0>
       #<SDL-FFI:SDL-POINT x 5 y 10>
       #<SDL-FFI:SDL-POINT x 2 y 2>)"
   (if bindings
-      `(%with-point (,(car bindings))
+      `(%with-point make-point 0 (,(car bindings))
          (with-points ,(cdr bindings) ,@body))
+      `(progn ,@body)))
+
+(defmacro with-f-points (bindings &body body)
+  "A LET-like convenient bindings facility for SDL_FPoint structures. Raw
+ symbols are bound to (make-f-point 0.0 0.0).
+
+  Example:
+
+  (let ((a 1) (b 2))
+    (with-f-points (foo
+                   (qux 5.0 10.0)
+                   (bar (1+ a) b))
+       (list foo qux bar)))
+
+  -> (#<SDL-FFI:SDL-FPOINT x 0.0 y 0.0>
+      #<SDL-FFI:SDL-FPOINT x 5.0 y 10.0>
+      #<SDL-FFI:SDL-FPOINT x 2.0 y 2.0>)"
+  (if bindings
+      `(%with-point make-f-point 0.0 (,(car bindings))
+         (with-f-points ,(cdr bindings) ,@body))
       `(progn ,@body)))
 
 (defun points* (&rest points)
   "Return a pointer to SDL_Point and the number of elements in it."
   (let ((num-points (length points)))
     (c-let ((c-points sdl2-ffi:sdl-point :count num-points))
+      (loop :for i :from 0
+            :for point :in points
+            :do (copy-into-point (c-points i) point))
+      (values (c-points &) num-points))))
+
+(defun f-points* (&rest points)
+  "Return a pointer to SDL_FPoint and the number of elements in it."
+  (let ((num-points (length points)))
+    (c-let ((c-points sdl2-ffi:sdl-f-point :count num-points))
       (loop :for i :from 0
             :for point :in points
             :do (copy-into-point (c-points i) point))

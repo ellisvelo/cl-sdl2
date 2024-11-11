@@ -193,6 +193,7 @@
    #:copy-into-rect
    #:copy-point
    #:copy-rect
+   #:f-points*
    #:f-rect-empty
    #:f-rect-equals
    #:f-rect-height
@@ -210,6 +211,7 @@
    #:intersect-f-rect-and-line
    #:make-f-rect
    #:make-point
+   #:make-f-point
    #:make-rect
    #:point-x
    #:point-y
@@ -223,6 +225,7 @@
    #:rects*
    #:union-rect
    #:with-f-rects
+   #:with-f-points
    #:with-points
    #:with-rects
 
@@ -232,6 +235,8 @@
    #:render-clear
    #:render-draw-line
    #:render-draw-lines
+   #:render-draw-line-f
+   #:render-draw-lines-f
    #:render-draw-point
    #:render-draw-points
    #:render-draw-rect
