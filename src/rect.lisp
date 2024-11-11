@@ -41,14 +41,18 @@
       `(progn ,@body)))
 
 (defmethod print-object ((point sdl2-ffi:sdl-point) stream)
-  (c-point (point)
-    (print-unreadable-object (point stream :type t :identity t)
-      (format stream "x ~A y ~A" (point :x) (point :y)))))
+  (if (autowrap:valid-p point)
+      (c-point (point)
+	(print-unreadable-object (point stream :type t :identity t)
+	  (format stream "x ~A y ~A" (point :x) (point :y))))
+      (call-next-method)))
 
 (defmethod print-object ((point sdl2-ffi:sdl-f-point) stream)
-  (c-f-point (point)
-    (print-unreadable-object (point stream :type t :identity t)
-      (format stream "x ~A y ~A" (point :x) (point :y)))))
+  (if (autowrap:valid-p point)
+      (c-f-point (point)
+	(print-unreadable-object (point stream :type t :identity t)
+	  (format stream "x ~A y ~A" (point :x) (point :y))))
+      (call-next-method)))
 
 (defun copy-point (point)
   "Allocate and return a new SDL_Point and make its slots be equal to the passed in SDL_Point."
@@ -109,7 +113,7 @@ to (make-point 0 0).
 
   Example:
 
-  (let ((a 1) (b 2))
+  (let ((a 1.0) (b 2.0))
     (with-f-points (foo
                    (qux 5.0 10.0)
                    (bar (1+ a) b))
