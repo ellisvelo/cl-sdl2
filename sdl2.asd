@@ -7,7 +7,8 @@
                :cl-plus-c
                :cl-ppcre
                :trivial-channels
-               :trivial-features)
+               :trivial-features
+               :float-features)
   :pathname "src"
   :serial t
   :components
