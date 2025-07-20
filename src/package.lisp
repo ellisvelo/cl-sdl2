@@ -96,6 +96,7 @@
    #:gl-set-attr
    #:gl-set-attrs
    #:gl-get-proc-address
+   #:gl-get-drawable-size
    #:with-everything
 
    ;; events.lisp
@@ -139,6 +140,7 @@
    #:warp-mouse-in-window
    #:hide-cursor
    #:show-cursor
+   #:show-cursor-p
    #:set-relative-mouse-mode
    #:relative-mouse-mode-p
    #:toggle-relative-mouse-mode
