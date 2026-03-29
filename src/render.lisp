@@ -318,3 +318,14 @@ See Bug No. 1586 before using this function!"
 
 (defun gl-unbind-texture (texture)
   (check-rc (sdl-gl-unbind-texture texture)))
+
+(defun get-render-logical-size (renderer)
+  "Gets the device independent resolution for rendering."
+  (c-with ((width :int)
+           (height :int))
+    (check-rc (sdl-render-get-logical-size renderer (width &) (height &)))
+    (values width height)))
+
+(defun set-render-logical-size (renderer width height)
+  "Set a device independent resolution for rendering."
+  (check-rc (sdl-render-set-logical-size renderer width height)))

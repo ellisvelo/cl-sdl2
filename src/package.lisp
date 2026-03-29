@@ -284,6 +284,8 @@
    #:gl-bind-texture
    #:gl-unbind-texture
    #:with-renderer
+   #:get-render-logical-size
+   #:set-render-logical-size
 
    ;; haptic.lisp
    #:joystick-is-haptic-p
