@@ -209,6 +209,7 @@
    #:has-intersect
    #:has-intersect-f
    #:intersect-rect
+   #:intersect-f-rect
    #:intersect-rect-and-line
    #:intersect-f-rect-and-line
    #:make-f-rect

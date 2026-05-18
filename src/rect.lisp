@@ -276,15 +276,27 @@ to (make-rect 0 0 0 0).
   t)
 
 (defun intersect-rect (first-rect &rest rects)
-  "Return two values. The first one is T if the intersection of ALL rectangles results in a
-non-empty intersection. The second value is the SDL_Rect of the intersection rectangle. If an empty
-intersection is discovered, then NIL and an empty rectangle at the origin is returned. The second
-value is always a newly allocated SDL_Rect structure."
-  (let ((empty (make-rect 0 0 0 0))
-        (intersect (copy-rect first-rect)))
+  "Returns T if all rectangles share a mutual, non-empty overlapping region.
+The second value is a SINGLE, newly allocated SDL_Rect representing that total
+intersection.  The caller is responsible for freeing this single
+structure. Returns (values nil nil) on failure."
+  (let ((intersect (copy-rect first-rect)))
     (dolist (rect rects)
       (unless (sdl-true-p (sdl-intersect-rect rect intersect intersect))
-        (return-from intersect-rect (values nil empty))))
+        (return-from intersect-rect (progn (free-rect intersect)
+                                           (values nil nil)))))
+    (values t intersect)))
+
+(defun intersect-f-rect (first-f-rect &rest f-rects)
+  "Returns T if all rectangles share a mutual, non-empty overlapping region.
+The second value is a SINGLE, newly allocated SDL_FRect representing that total
+intersection.  The caller is responsible for freeing this single
+structure. Returns (values nil nil) on failure."
+  (let ((intersect (copy-f-rect first-f-rect)))
+    (dolist (rect f-rects)
+      (unless (sdl-true-p (sdl-intersect-f-rect rect intersect intersect))
+        (return-from intersect-f-rect (progn (free-f-rect intersect)
+                                             (values nil nil)))))
     (values t intersect)))
 
 (defun has-intersect-f (first-rect &rest rects)
